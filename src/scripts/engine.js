@@ -20,18 +20,28 @@ const state = {
   },
 };
 
+function playGameOver(){
+    let audioOver = new Audio("./src/audios/arcade.m4a.wav");
+    // audio.volume = 0.2;
+    audioOver.play();
+}
+
 function countDown(){
     state.values.currentTime--;
     state.view.timeLeft.textContent = state.values.currentTime;
+
     if(state.values.currentTime <= 0) {
         clearInterval(state.actions.countDownTimerId);
         clearInterval(state.actions.timerId);
+        // playGameOver();
         alert("Game Over! O seu resultado foi: " + state.values.result);
     }
 }
 
-function playSound(audioName) {
-    let audio = new Audio(`./src/audios/${audioName}.m4a`);
+
+
+function playSound() {
+    let audio = new Audio("./src/audios/hit.m4a");
     audio.volume = 0.2;
     audio.play();
 }
@@ -59,7 +69,8 @@ function addListenerHitBox(){
                 state.values.result++;
                 state.view.score.textContent = state.values.result;
                 state.values.hitPosition = null;
-                playSound("hit");
+                playSound();
+               
                 
 
             }
